@@ -1,23 +1,38 @@
 /*
  * File: NameSurfer.java
  * ---------------------
- * When it is finished, this program will implements the viewer for
- * the baby-name database described in the assignment handout.
+ * This program implements the viewer for a baby-name database.
+ * Author: Nicolas Echavarria
  */
 
 import acm.program.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class NameSurfer extends Program implements NameSurferConstants {
+// Commented to generate Milestone 1
+// public class NameSurfer extends Program implements NameSurferConstants {
+   public class NameSurfer extends ConsoleProgram implements NameSurferConstants {
 
+    
 /* Method: init() */
 /**
  * This method has the responsibility for reading in the data base
  * and initializing the interactors at the bottom of the window.
  */
 	public void init() {
-	    // You fill this in, along with any helper methods //
+	    nameField = new JTextField(MAX_NAME);
+        nameField.putClientProperty("JTextField.variant","search");
+        nameField.setToolTipText("Insert here the name you would like to search for.");
+        nameField.setActionCommand("Graph");
+        nameField.addActionListener(this);
+        name = new JLabel("Name:");
+        graphButton = new JButton("Graph");
+        clearButton = new JButton("Clear");
+        add(name, SOUTH);
+        add(nameField, SOUTH);
+        add(graphButton, SOUTH);
+        add(clearButton, SOUTH);
+        addActionListeners();
 	}
 
 /* Method: actionPerformed(e) */
@@ -27,8 +42,20 @@ public class NameSurfer extends Program implements NameSurferConstants {
  * button actions.
  */
 	public void actionPerformed(ActionEvent e) {
-		// You fill this in //
+		String cmd = e.getActionCommand();
+        if (cmd.equals("Clear")) {
+            println("Clear");
+        } else if (cmd.equals("Graph")) {
+            println("Graph:" + nameField.getText());
+        }
 	}
     
+  /* Private constants */
+    private static final int MAX_NAME = 30;
     
+  /* Private instance variables */
+    private JLabel name;
+    private JTextField nameField;
+    private JButton clearButton;
+    private JButton graphButton;
 }
