@@ -5,11 +5,13 @@
  * NameSurferEntry contains a name and a list giving the popularity
  * of that name for each decade stretching back to 1900.
  */
-
+import acm.program.*;
 import acm.util.*;
+import java.io.*;
 import java.util.*;
 
-public class NameSurferEntry implements NameSurferConstants {
+
+public class NameSurferEntry extends ConsoleProgram implements NameSurferConstants {
 
 /* Constructor: NameSurferEntry(line) */
 /**
@@ -19,8 +21,26 @@ public class NameSurferEntry implements NameSurferConstants {
  * decade.
  */
 	public NameSurferEntry(String line) {
-		// You fill this in //
-	}
+        // Reads the line from the speficied file and stores it in "line"
+        try {
+            BufferedReader rd = new BufferedReader(new FileReader(DATA_FILE));
+            while (true) {
+                line = rd.readLine();
+                if (line == null) break;
+                println(line);
+            }
+            rd.close();
+        } catch (IOException ex) {
+            throw new ErrorException(ex);
+        }
+        // Segments the the string in two parts, the name and the ranking data, using the
+        // StringTokenizer Class
+
+
+
+        // Stores the key and value for each name in a HashMap
+        names = new HashMap<String, Arrays>();
+    }
 
 /* Method: getName() */
 /**
@@ -40,8 +60,8 @@ public class NameSurferEntry implements NameSurferConstants {
  * not appear in a decade, the rank value is 0.
  */
 	public int getRank(int decade) {
-		// You need to turn this stub into a real implementation //
-		return 0;
+        // You need to turn this stub into a real implementation //
+        return 0;
 	}
 
 /* Method: toString() */
@@ -53,5 +73,14 @@ public class NameSurferEntry implements NameSurferConstants {
 		// You need to turn this stub into a real implementation //
 		return "";
 	}
+
+
+/* Private constants */
+    private static final String DATA_FILE = "/Users/nicolasechavarria/Documents/Personal/Stanford University/SEE/CS106A/Assignments/CS106A_06/names-data-one-line.txt";
+
+/* Private instance variables */
+    private String record;
+    private HashMap<String, Arrays> names;
+    
 }
 
